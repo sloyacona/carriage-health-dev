@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  /* Champagne & Charcoal design tokens */
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-mulish), ui-sans-serif, system-ui, sans-serif;
+
+  --color-linen: #fbfbf7;
+  --color-charcoal: #201e1b;
+  --color-champagne: #eef4d8;
+  --color-champagne-deep: #d6e8b0;
+  --color-sage: #6f8a55;
+  --color-amber: #bd8a3d;
+  --color-muted: #7c7a72;
+  --color-border: #e7e5dc;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-linen);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+}
