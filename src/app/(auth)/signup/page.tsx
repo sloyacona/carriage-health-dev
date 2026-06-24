@@ -25,7 +25,7 @@ export default function SignupPage() {
       options: {
         // Used when email confirmation is ON — Supabase redirects here after the click.
         // When confirmation is OFF this option is ignored; provisioning runs below instead.
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
       },
     });
 

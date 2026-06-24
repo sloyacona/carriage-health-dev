@@ -17,17 +17,18 @@ import { provisionMember } from "@/lib/provision-member";
 // instead, called directly from the signup page.
 
 export async function GET(request: NextRequest) {
-  const { searchParams, origin } = new URL(request.url);
+  const { searchParams } = new URL(request.url);
+  const appOrigin = process.env.NEXT_PUBLIC_APP_URL ?? new URL(request.url).origin;
   const code = searchParams.get("code");
   const type = searchParams.get("type");
 
   if (!code) {
     console.error("[auth/callback] no code in request — check Supabase Redirect URL allowlist");
-    return NextResponse.redirect(`${origin}/login?error=missing_code`);
+    return NextResponse.redirect(`${appOrigin}/login?error=missing_code`);
   }
 
   const redirectTarget =
-    type === "recovery" ? `${origin}/auth/reset-password` : `${origin}/dashboard`;
+    type === "recovery" ? `${appOrigin}/auth/reset-password` : `${appOrigin}/dashboard`;
   const response = NextResponse.redirect(redirectTarget);
 
   const supabase = createServerClient(
@@ -51,7 +52,7 @@ export async function GET(request: NextRequest) {
 
   if (exchangeError || !data.user) {
     console.error("[auth/callback] code exchange failed");
-    return NextResponse.redirect(`${origin}/login?error=invalid_code`);
+    return NextResponse.redirect(`${appOrigin}/login?error=invalid_code`);
   }
 
   if (type === "recovery") {
@@ -66,7 +67,7 @@ export async function GET(request: NextRequest) {
 
   if (!result.ok) {
     console.error("[auth/callback] provisioning failed at", result.step);
-    return NextResponse.redirect(`${origin}/login?error=provisioning_failed`);
+    return NextResponse.redirect(`${appOrigin}/login?error=provisioning_failed`);
   }
 
   return response;
