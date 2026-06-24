@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { createSupabaseAdminClient } from "@/lib/supabase/server";
-import { stripe, PANEL_PRICE_CENTS } from "@/lib/stripe";
+import { getStripe, PANEL_PRICE_CENTS } from "@/lib/stripe";
 import { writeAuditLog } from "@/lib/audit-log";
 
 export async function POST() {
@@ -67,7 +67,7 @@ export async function POST() {
 
   // Create the Stripe Payment Intent — secret key stays server-side; client only
   // receives the client_secret, which is scoped to this payment only.
-  const paymentIntent = await stripe.paymentIntents.create({
+  const paymentIntent = await getStripe().paymentIntents.create({
     amount: PANEL_PRICE_CENTS,
     currency: "usd",
     // Stored in PI metadata so the webhook can look up the order without a DB round-trip
