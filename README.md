@@ -30,7 +30,7 @@ Testing can't explain every loss or guarantee an outcome. The goal is earlier ac
 
 Built hands-on with **Claude Code** in VS Code, using AI-assisted development to take a regulated healthcare product from concept to working software.
 
-**Stack:** Framer (marketing site) · TypeScript · Supabase · Railway · Junction · Stripe. Designed with HIPAA requirements in mind, with BAA-covered vendors wherever health data is handled.
+**Stack:** Framer (marketing site) · TypeScript · Next.js · Supabase · Railway · Junction · Stripe. Designed with HIPAA requirements in mind, with BAA-covered vendors wherever health data is handled.
 
 ## Status
 
